@@ -52,10 +52,10 @@ const Index = () => {
   return (
     <Container maxW="container.xl" py={10}>
       <VStack spacing={8} align="stretch">
-        <Text fontSize="4xl" fontWeight="bold" textAlign="center">
-          Material Management SaaS
+        <Text fontSize="4xl" fontWeight="bold" textAlign="center" color="teal.500" mb={4}>
+          Material Management System
         </Text>
-        <Text fontSize="2xl" fontWeight="bold">
+        <Text fontSize="2xl" fontWeight="bold" color="teal.600">
           Material Management Form
         </Text>
         <HStack spacing={4} align="stretch">
@@ -122,7 +122,7 @@ const Index = () => {
           </VStack>
         </HStack>
 
-        <Text fontSize="2xl" fontWeight="bold">
+        <Text fontSize="2xl" fontWeight="bold" color="teal.600">
           Materials
         </Text>
         <Table variant="simple" border="1px" borderColor="gray.200">
