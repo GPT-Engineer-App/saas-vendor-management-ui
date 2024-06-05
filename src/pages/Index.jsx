@@ -1,4 +1,4 @@
-import { Container, Text, VStack, HStack, Button, Table, Thead, Tbody, Tr, Th, Td, Input, FormControl, FormLabel, Checkbox, IconButton } from "@chakra-ui/react";
+import { Container, Text, VStack, HStack, Button, Table, Thead, Tbody, Tr, Th, Td, Input, FormControl, FormLabel, Checkbox, IconButton, Box } from "@chakra-ui/react";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 
@@ -125,106 +125,108 @@ const Index = () => {
         <Text fontSize="2xl" fontWeight="bold" color="teal.600">
           Materials
         </Text>
-        <Table variant="simple" border="1px" borderColor="gray.200">
-          <Thead>
-            <Tr border="1px" borderColor="gray.200">
-              <Th border="1px" borderColor="gray.200">
-                Material Number
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Description
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Unit Of Measure
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Material Group
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Material Type
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Plant
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Storage Location
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Valuation Class
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Standard Price
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Moving Average Price
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Weight
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Volume
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Hazardous Indicator
-              </Th>
-              <Th border="1px" borderColor="gray.200">
-                Actions
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {invoices.map((material, index) => (
-              <Tr key={index} border="1px" borderColor="gray.200">
-                <Td border="1px" borderColor="gray.200">
-                  {material.materialNumber}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.description}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.unitOfMeasure}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.materialGroup}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.materialType}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.plant}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.storageLocation}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.valuationClass}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.standardPrice}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.movingAveragePrice}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.weight}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.volume}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  {material.hazardousIndicator ? "Yes" : "No"}
-                </Td>
-                <Td border="1px" borderColor="gray.200">
-                  <HStack spacing={2}>
-                    <IconButton aria-label="View" icon={<FaEye />} />
-                    <IconButton aria-label="Edit" icon={<FaEdit />} onClick={() => handleEdit(index)} />
-                    <IconButton aria-label="Delete" icon={<FaTrash />} onClick={() => handleDelete(index)} />
-                  </HStack>
-                </Td>
+        <Box maxH="400px" overflowY="auto">
+          <Table variant="simple" border="1px" borderColor="gray.200">
+            <Thead>
+              <Tr border="1px" borderColor="gray.200">
+                <Th border="1px" borderColor="gray.200">
+                  Material Number
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Description
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Unit Of Measure
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Material Group
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Material Type
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Plant
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Storage Location
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Valuation Class
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Standard Price
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Moving Average Price
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Weight
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Volume
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Hazardous Indicator
+                </Th>
+                <Th border="1px" borderColor="gray.200">
+                  Actions
+                </Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
+            </Thead>
+            <Tbody>
+              {invoices.map((material, index) => (
+                <Tr key={index} border="1px" borderColor="gray.200">
+                  <Td border="1px" borderColor="gray.200">
+                    {material.materialNumber}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.description}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.unitOfMeasure}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.materialGroup}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.materialType}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.plant}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.storageLocation}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.valuationClass}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.standardPrice}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.movingAveragePrice}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.weight}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.volume}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    {material.hazardousIndicator ? "Yes" : "No"}
+                  </Td>
+                  <Td border="1px" borderColor="gray.200">
+                    <HStack spacing={2}>
+                      <IconButton aria-label="View" icon={<FaEye />} />
+                      <IconButton aria-label="Edit" icon={<FaEdit />} onClick={() => handleEdit(index)} />
+                      <IconButton aria-label="Delete" icon={<FaTrash />} onClick={() => handleDelete(index)} />
+                    </HStack>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </Box>
       </VStack>
     </Container>
   );
