@@ -97,30 +97,60 @@ const Index = () => {
         <Text fontSize="2xl" fontWeight="bold">
           Invoices
         </Text>
-        <Table variant="simple">
+        <Table variant="simple" border="1px" borderColor="gray.200">
           <Thead>
-            <Tr>
-              <Th>Invoice Number</Th>
-              <Th>PO Number</Th>
-              <Th>Invoice Date</Th>
-              <Th>Vendor Number</Th>
-              <Th>Total Amount</Th>
-              <Th>Payment Terms</Th>
-              <Th>Status</Th>
-              <Th>Actions</Th>
+            <Tr border="1px" borderColor="gray.200">
+              <Th border="1px" borderColor="gray.200">
+                Invoice Number
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                PO Number
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Invoice Date
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Vendor Number
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Total Amount
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Payment Terms
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Status
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Actions
+              </Th>
             </Tr>
           </Thead>
           <Tbody>
             {invoices.map((invoice, index) => (
-              <Tr key={index}>
-                <Td>{invoice.invoiceNumber}</Td>
-                <Td>{invoice.poNumber}</Td>
-                <Td>{invoice.invoiceDate}</Td>
-                <Td>{invoice.vendorNumber}</Td>
-                <Td>{invoice.totalAmount}</Td>
-                <Td>{invoice.paymentTerms}</Td>
-                <Td>{invoice.status}</Td>
-                <Td>
+              <Tr key={index} border="1px" borderColor="gray.200">
+                <Td border="1px" borderColor="gray.200">
+                  {invoice.invoiceNumber}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {invoice.poNumber}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {invoice.invoiceDate}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {invoice.vendorNumber}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {invoice.totalAmount}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {invoice.paymentTerms}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {invoice.status}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
                   <HStack spacing={2}>
                     <IconButton aria-label="View" icon={<FaEye />} />
                     <IconButton aria-label="Edit" icon={<FaEdit />} onClick={() => handleEdit(index)} />
