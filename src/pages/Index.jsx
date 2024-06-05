@@ -1,17 +1,23 @@
-import { Container, Text, VStack, HStack, Button, Table, Thead, Tbody, Tr, Th, Td, Input, FormControl, FormLabel, Select, IconButton } from "@chakra-ui/react";
+import { Container, Text, VStack, HStack, Button, Table, Thead, Tbody, Tr, Th, Td, Input, FormControl, FormLabel, Checkbox, IconButton } from "@chakra-ui/react";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 
 const Index = () => {
   const [invoices, setInvoices] = useState([]);
   const [formData, setFormData] = useState({
-    invoiceNumber: "",
-    poNumber: "",
-    invoiceDate: "",
-    vendorNumber: "",
-    totalAmount: "",
-    paymentTerms: "",
-    status: "",
+    materialNumber: "",
+    description: "",
+    unitOfMeasure: "",
+    materialGroup: "",
+    materialType: "",
+    plant: "",
+    storageLocation: "",
+    valuationClass: "",
+    standardPrice: "",
+    movingAveragePrice: "",
+    weight: "",
+    volume: "",
+    hazardousIndicator: false,
   });
 
   const handleChange = (e) => {
@@ -47,46 +53,68 @@ const Index = () => {
     <Container maxW="container.xl" py={10}>
       <VStack spacing={8} align="stretch">
         <Text fontSize="4xl" fontWeight="bold" textAlign="center">
-          Vendor Management SaaS
+          Material Management SaaS
         </Text>
         <Text fontSize="2xl" fontWeight="bold">
-          Invoice Verification Form
+          Material Management Form
         </Text>
         <HStack spacing={4} align="stretch">
           <VStack spacing={4} align="stretch" flex="1">
             <FormControl isRequired>
-              <FormLabel>Invoice Number</FormLabel>
-              <Input type="text" maxLength={20} placeholder="Enter Invoice Number" name="invoiceNumber" value={formData.invoiceNumber} onChange={handleChange} />
+              <FormLabel>Material Number</FormLabel>
+              <Input type="text" maxLength={20} placeholder="Enter Material Number" name="materialNumber" value={formData.materialNumber} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Invoice Date</FormLabel>
-              <Input type="date" name="invoiceDate" value={formData.invoiceDate} onChange={handleChange} />
+              <FormLabel>Description</FormLabel>
+              <Input type="text" maxLength={255} placeholder="Enter Description" name="description" value={formData.description} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Total Amount</FormLabel>
-              <Input type="number" min={0} placeholder="Enter Total Amount" name="totalAmount" value={formData.totalAmount} onChange={handleChange} />
+              <FormLabel>Unit Of Measure</FormLabel>
+              <Input type="text" maxLength={10} placeholder="Enter Unit Of Measure" name="unitOfMeasure" value={formData.unitOfMeasure} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Status</FormLabel>
-              <Select placeholder="Select Status" name="status" value={formData.status} onChange={handleChange}>
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="rejected">Rejected</option>
-              </Select>
+              <FormLabel>Material Group</FormLabel>
+              <Input type="text" maxLength={50} placeholder="Enter Material Group" name="materialGroup" value={formData.materialGroup} onChange={handleChange} />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Material Type</FormLabel>
+              <Input type="text" maxLength={20} placeholder="Enter Material Type" name="materialType" value={formData.materialType} onChange={handleChange} />
             </FormControl>
           </VStack>
           <VStack spacing={4} align="stretch" flex="1">
             <FormControl isRequired>
-              <FormLabel>PO Number</FormLabel>
-              <Input type="text" maxLength={20} placeholder="Enter PO Number" name="poNumber" value={formData.poNumber} onChange={handleChange} />
+              <FormLabel>Plant</FormLabel>
+              <Input type="text" maxLength={10} placeholder="Enter Plant" name="plant" value={formData.plant} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Vendor Number</FormLabel>
-              <Input type="text" maxLength={20} placeholder="Enter Vendor Number" name="vendorNumber" value={formData.vendorNumber} onChange={handleChange} />
+              <FormLabel>Storage Location</FormLabel>
+              <Input type="text" maxLength={10} placeholder="Enter Storage Location" name="storageLocation" value={formData.storageLocation} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Payment Terms</FormLabel>
-              <Input type="text" maxLength={50} placeholder="Enter Payment Terms" name="paymentTerms" value={formData.paymentTerms} onChange={handleChange} />
+              <FormLabel>Valuation Class</FormLabel>
+              <Input type="text" maxLength={20} placeholder="Enter Valuation Class" name="valuationClass" value={formData.valuationClass} onChange={handleChange} />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Standard Price</FormLabel>
+              <Input type="number" min={0} step={0.01} placeholder="Enter Standard Price" name="standardPrice" value={formData.standardPrice} onChange={handleChange} />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Moving Average Price</FormLabel>
+              <Input type="number" min={0} step={0.01} placeholder="Enter Moving Average Price" name="movingAveragePrice" value={formData.movingAveragePrice} onChange={handleChange} />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Weight</FormLabel>
+              <Input type="number" min={0} step={0.01} placeholder="Enter Weight" name="weight" value={formData.weight} onChange={handleChange} />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Volume</FormLabel>
+              <Input type="number" min={0} step={0.01} placeholder="Enter Volume" name="volume" value={formData.volume} onChange={handleChange} />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Hazardous Indicator</FormLabel>
+              <Checkbox name="hazardousIndicator" isChecked={formData.hazardousIndicator} onChange={(e) => setFormData({ ...formData, hazardousIndicator: e.target.checked })}>
+                Hazardous
+              </Checkbox>
             </FormControl>
             <Button colorScheme="teal" size="md" alignSelf="flex-end" onClick={handleSubmit}>
               Submit
@@ -95,31 +123,49 @@ const Index = () => {
         </HStack>
 
         <Text fontSize="2xl" fontWeight="bold">
-          Invoices
+          Materials
         </Text>
         <Table variant="simple" border="1px" borderColor="gray.200">
           <Thead>
             <Tr border="1px" borderColor="gray.200">
               <Th border="1px" borderColor="gray.200">
-                Invoice Number
+                Material Number
               </Th>
               <Th border="1px" borderColor="gray.200">
-                PO Number
+                Description
               </Th>
               <Th border="1px" borderColor="gray.200">
-                Invoice Date
+                Unit Of Measure
               </Th>
               <Th border="1px" borderColor="gray.200">
-                Vendor Number
+                Material Group
               </Th>
               <Th border="1px" borderColor="gray.200">
-                Total Amount
+                Material Type
               </Th>
               <Th border="1px" borderColor="gray.200">
-                Payment Terms
+                Plant
               </Th>
               <Th border="1px" borderColor="gray.200">
-                Status
+                Storage Location
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Valuation Class
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Standard Price
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Moving Average Price
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Weight
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Volume
+              </Th>
+              <Th border="1px" borderColor="gray.200">
+                Hazardous Indicator
               </Th>
               <Th border="1px" borderColor="gray.200">
                 Actions
@@ -127,28 +173,46 @@ const Index = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {invoices.map((invoice, index) => (
+            {invoices.map((material, index) => (
               <Tr key={index} border="1px" borderColor="gray.200">
                 <Td border="1px" borderColor="gray.200">
-                  {invoice.invoiceNumber}
+                  {material.materialNumber}
                 </Td>
                 <Td border="1px" borderColor="gray.200">
-                  {invoice.poNumber}
+                  {material.description}
                 </Td>
                 <Td border="1px" borderColor="gray.200">
-                  {invoice.invoiceDate}
+                  {material.unitOfMeasure}
                 </Td>
                 <Td border="1px" borderColor="gray.200">
-                  {invoice.vendorNumber}
+                  {material.materialGroup}
                 </Td>
                 <Td border="1px" borderColor="gray.200">
-                  {invoice.totalAmount}
+                  {material.materialType}
                 </Td>
                 <Td border="1px" borderColor="gray.200">
-                  {invoice.paymentTerms}
+                  {material.plant}
                 </Td>
                 <Td border="1px" borderColor="gray.200">
-                  {invoice.status}
+                  {material.storageLocation}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {material.valuationClass}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {material.standardPrice}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {material.movingAveragePrice}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {material.weight}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {material.volume}
+                </Td>
+                <Td border="1px" borderColor="gray.200">
+                  {material.hazardousIndicator ? "Yes" : "No"}
                 </Td>
                 <Td border="1px" borderColor="gray.200">
                   <HStack spacing={2}>
