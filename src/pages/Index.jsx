@@ -1,7 +1,48 @@
 import { Container, Text, VStack, HStack, Button, Table, Thead, Tbody, Tr, Th, Td, Input, FormControl, FormLabel, Select, IconButton } from "@chakra-ui/react";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { useState } from "react";
 
 const Index = () => {
+  const [invoices, setInvoices] = useState([]);
+  const [formData, setFormData] = useState({
+    invoiceNumber: "",
+    poNumber: "",
+    invoiceDate: "",
+    vendorNumber: "",
+    totalAmount: "",
+    paymentTerms: "",
+    status: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    setInvoices([...invoices, formData]);
+    setFormData({
+      invoiceNumber: "",
+      poNumber: "",
+      invoiceDate: "",
+      vendorNumber: "",
+      totalAmount: "",
+      paymentTerms: "",
+      status: "",
+    });
+  };
+
+  const handleEdit = (index) => {
+    const invoiceToEdit = invoices[index];
+    setFormData(invoiceToEdit);
+    handleDelete(index);
+  };
+
+  const handleDelete = (index) => {
+    const updatedInvoices = invoices.filter((_, i) => i !== index);
+    setInvoices(updatedInvoices);
+  };
+
   return (
     <Container maxW="container.xl" py={10}>
       <VStack spacing={8} align="stretch">
@@ -15,19 +56,19 @@ const Index = () => {
           <VStack spacing={4} align="stretch" flex="1">
             <FormControl isRequired>
               <FormLabel>Invoice Number</FormLabel>
-              <Input type="text" maxLength={20} placeholder="Enter Invoice Number" />
+              <Input type="text" maxLength={20} placeholder="Enter Invoice Number" name="invoiceNumber" value={formData.invoiceNumber} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Invoice Date</FormLabel>
-              <Input type="date" />
+              <Input type="date" name="invoiceDate" value={formData.invoiceDate} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Total Amount</FormLabel>
-              <Input type="number" min={0} placeholder="Enter Total Amount" />
+              <Input type="number" min={0} placeholder="Enter Total Amount" name="totalAmount" value={formData.totalAmount} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Status</FormLabel>
-              <Select placeholder="Select Status">
+              <Select placeholder="Select Status" name="status" value={formData.status} onChange={handleChange}>
                 <option value="pending">Pending</option>
                 <option value="approved">Approved</option>
                 <option value="rejected">Rejected</option>
@@ -37,17 +78,17 @@ const Index = () => {
           <VStack spacing={4} align="stretch" flex="1">
             <FormControl isRequired>
               <FormLabel>PO Number</FormLabel>
-              <Input type="text" maxLength={20} placeholder="Enter PO Number" />
+              <Input type="text" maxLength={20} placeholder="Enter PO Number" name="poNumber" value={formData.poNumber} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Vendor Number</FormLabel>
-              <Input type="text" maxLength={20} placeholder="Enter Vendor Number" />
+              <Input type="text" maxLength={20} placeholder="Enter Vendor Number" name="vendorNumber" value={formData.vendorNumber} onChange={handleChange} />
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Payment Terms</FormLabel>
-              <Input type="text" maxLength={50} placeholder="Enter Payment Terms" />
+              <Input type="text" maxLength={50} placeholder="Enter Payment Terms" name="paymentTerms" value={formData.paymentTerms} onChange={handleChange} />
             </FormControl>
-            <Button colorScheme="teal" size="md" alignSelf="flex-end">
+            <Button colorScheme="teal" size="md" alignSelf="flex-end" onClick={handleSubmit}>
               Submit
             </Button>
           </VStack>
@@ -70,23 +111,24 @@ const Index = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>INV001</Td>
-              <Td>PO1234</Td>
-              <Td>2023-10-01</Td>
-              <Td>VEND001</Td>
-              <Td>$1000</Td>
-              <Td>Net 30</Td>
-              <Td>Pending</Td>
-              <Td>
-                <HStack spacing={2}>
-                  <IconButton aria-label="View" icon={<FaEye />} />
-                  <IconButton aria-label="Edit" icon={<FaEdit />} />
-                  <IconButton aria-label="Delete" icon={<FaTrash />} />
-                </HStack>
-              </Td>
-            </Tr>
-            {/* Add more rows as needed */}
+            {invoices.map((invoice, index) => (
+              <Tr key={index}>
+                <Td>{invoice.invoiceNumber}</Td>
+                <Td>{invoice.poNumber}</Td>
+                <Td>{invoice.invoiceDate}</Td>
+                <Td>{invoice.vendorNumber}</Td>
+                <Td>{invoice.totalAmount}</Td>
+                <Td>{invoice.paymentTerms}</Td>
+                <Td>{invoice.status}</Td>
+                <Td>
+                  <HStack spacing={2}>
+                    <IconButton aria-label="View" icon={<FaEye />} />
+                    <IconButton aria-label="Edit" icon={<FaEdit />} onClick={() => handleEdit(index)} />
+                    <IconButton aria-label="Delete" icon={<FaTrash />} onClick={() => handleDelete(index)} />
+                  </HStack>
+                </Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </VStack>
