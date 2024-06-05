@@ -8,50 +8,50 @@ const Index = () => {
         <Text fontSize="4xl" fontWeight="bold" textAlign="center">
           Vendor Management SaaS
         </Text>
-        <Button colorScheme="teal" size="lg" alignSelf="center">
-          Get Started
-        </Button>
-
         <Text fontSize="2xl" fontWeight="bold">
           Invoice Verification Form
         </Text>
-        <VStack spacing={4} align="stretch">
-          <FormControl isRequired>
-            <FormLabel>Invoice Number</FormLabel>
-            <Input type="text" maxLength={20} placeholder="Enter Invoice Number" />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>PO Number</FormLabel>
-            <Input type="text" maxLength={20} placeholder="Enter PO Number" />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Invoice Date</FormLabel>
-            <Input type="date" />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Vendor Number</FormLabel>
-            <Input type="text" maxLength={20} placeholder="Enter Vendor Number" />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Total Amount</FormLabel>
-            <Input type="number" min={0} placeholder="Enter Total Amount" />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Payment Terms</FormLabel>
-            <Input type="text" maxLength={50} placeholder="Enter Payment Terms" />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel>Status</FormLabel>
-            <Select placeholder="Select Status">
-              <option value="pending">Pending</option>
-              <option value="approved">Approved</option>
-              <option value="rejected">Rejected</option>
-            </Select>
-          </FormControl>
-          <Button colorScheme="teal" size="md">
-            Submit
-          </Button>
-        </VStack>
+        <HStack spacing={4} align="stretch">
+          <VStack spacing={4} align="stretch" flex="1">
+            <FormControl isRequired>
+              <FormLabel>Invoice Number</FormLabel>
+              <Input type="text" maxLength={20} placeholder="Enter Invoice Number" />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Invoice Date</FormLabel>
+              <Input type="date" />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Total Amount</FormLabel>
+              <Input type="number" min={0} placeholder="Enter Total Amount" />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Status</FormLabel>
+              <Select placeholder="Select Status">
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </Select>
+            </FormControl>
+          </VStack>
+          <VStack spacing={4} align="stretch" flex="1">
+            <FormControl isRequired>
+              <FormLabel>PO Number</FormLabel>
+              <Input type="text" maxLength={20} placeholder="Enter PO Number" />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Vendor Number</FormLabel>
+              <Input type="text" maxLength={20} placeholder="Enter Vendor Number" />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel>Payment Terms</FormLabel>
+              <Input type="text" maxLength={50} placeholder="Enter Payment Terms" />
+            </FormControl>
+            <Button colorScheme="teal" size="md" alignSelf="flex-end">
+              Submit
+            </Button>
+          </VStack>
+        </HStack>
 
         <Text fontSize="2xl" fontWeight="bold">
           Invoices
